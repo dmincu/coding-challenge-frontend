@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
-import {List, ListItem} from 'material-ui/List';
-import ActionInfo from 'material-ui/svg-icons/action/info';
 import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
-import Subheader from 'material-ui/Subheader';
-import Avatar from 'material-ui/Avatar';
-import FileFolder from 'material-ui/svg-icons/file/folder';
-import ActionAssignment from 'material-ui/svg-icons/action/assignment';
 import {blue500, yellow600} from 'material-ui/styles/colors';
-import EditorInsertChart from 'material-ui/svg-icons/editor/insert-chart';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import searchIcon from './resources/search-icon-white.png';
@@ -52,28 +42,29 @@ class Menu extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <AppBar
-          onLeftIconButtonClick={this.handleToggle}
-          iconElementRight={this.state.logged ? <Logged /> : <Login />}
-        />
-        <Drawer
-          className="menu-header"
-          open={this.state.open}
-          onRequestChange={(open) => this.setState({open})} >
-          <MenuItem
-            primaryText={this.name} />
-          <MenuItem primaryText="Discover" 
-            rightIcon={<img src={searchIcon} />}
+        <div>
+          <AppBar
+            onLeftIconButtonClick={this.handleToggle}
+            iconElementRight={this.state.logged ? <Logged /> : <Login />}
           />
-          <MenuItem primaryText="Watched" disabled="true"  />
-          <Divider />
-          <MenuItem primaryText="Movies" />
-          <MenuItem primaryText="Tv Shows" />
-          <MenuItem primaryText="Saved" disabled="true" />
-          <Divider />
-          <MenuItem primaryText="Movies" />
-          <MenuItem primaryText="Tv Shows" />
-        </Drawer>
+          <Drawer
+            open={this.state.open}
+            onRequestChange={(open) => this.setState({open})} >
+            <MenuItem
+              primaryText={this.name} />
+            <MenuItem primaryText="Discover" 
+              rightIcon={<img src={searchIcon} alt="search icon" />}
+            />
+            <MenuItem primaryText="Watched" disabled={true}  />
+            <Divider />
+            <MenuItem primaryText="Movies" />
+            <MenuItem primaryText="Tv Shows" />
+            <MenuItem primaryText="Saved" disabled={true} />
+            <Divider />
+            <MenuItem primaryText="Movies" />
+            <MenuItem primaryText="Tv Shows" />
+          </Drawer>
+        </div>
       </MuiThemeProvider>
     );
   }
