@@ -24,7 +24,7 @@ const muiTheme = getMuiTheme({
 class Menu extends Component {
 
   state = {
-    name: "Guest",
+    name: "Diana",
     open: false,
     logged: true,
   };
@@ -51,18 +51,20 @@ class Menu extends Component {
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})} >
             <MenuItem
-              primaryText={this.name} />
-            <MenuItem primaryText="Discover" 
-              rightIcon={<img src={searchIcon} alt="search icon" />}
+              primaryText={logged ? this.name : 'Guest'} />
+            <MenuItem primaryText="Discover"
+              onClick={this.props.onMovieListClick}
+              rightIcon={<img src={searchIcon}
+              alt="search icon" />}
             />
             <MenuItem primaryText="Watched" disabled={true}  />
             <Divider />
-            <MenuItem primaryText="Movies" />
-            <MenuItem primaryText="Tv Shows" />
+            <MenuItem primaryText="Movies" onClick={this.props.onMovieListClick} />
+            <MenuItem primaryText="Tv Shows" onClick={this.props.onTvListClick} />
             <MenuItem primaryText="Saved" disabled={true} />
             <Divider />
-            <MenuItem primaryText="Movies" />
-            <MenuItem primaryText="Tv Shows" />
+            <MenuItem primaryText="Movies" onClick={this.props.onMovieListClick} />
+            <MenuItem primaryText="Tv Shows" onClick={this.props.onTvListClick} />
           </Drawer>
         </div>
       </MuiThemeProvider>
