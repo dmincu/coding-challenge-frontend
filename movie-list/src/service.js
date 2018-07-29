@@ -6,55 +6,43 @@ class MovieService {
 
    static getGenres() {
    		let GET_GENRES = '/genre/movie/list';
-		fetch(API_BASE + GET_GENRES + API_KEY)
-			.then(res => {
-				return res.json();
-			})
-			.then(data => {
-				return data.genres.map((entry) => {return entry.name;});
-			});
+		return API_BASE + GET_GENRES + API_KEY;
 	}
 
 	static listMovies() {
    		let GET_MOVIES = '/discover/movie';
-		fetch(API_BASE + GET_MOVIES + API_KEY)
-			.then(res => {
-				return res.json();
-			})
-			.then(data => {
-				console.log(data);
-			});
+		return API_BASE + GET_MOVIES + API_KEY;
 	}
 
 	static listTvShows() {
    		let GET_MOVIES = '/discover/tv';
-		fetch(API_BASE + GET_MOVIES + API_KEY)
+		return fetch(API_BASE + GET_MOVIES + API_KEY)
 			.then(res => {
 				return res.json();
 			})
 			.then(data => {
-				console.log(data);
+				return data;
 			});
 	}
 
 	static getMovieById(id) {
    		let GET_MOVIE_BY_ID = '/movie/' + id;
-		fetch(API_BASE + GET_MOVIE_BY_ID + API_KEY)
+		return fetch(API_BASE + GET_MOVIE_BY_ID + API_KEY)
 			.then(res => {
 				return res.json();
 			})
 			.then(data => {
-				console.log(data);
+				return data;
 			});
 	}
 
 	static getImage(imagePath) {
-		fetch(IMAGE_BASE + imagePath + API_KEY)
+		return fetch(IMAGE_BASE + imagePath + API_KEY)
 			.then(res => {
 				return res.json();
 			})
 			.then(data => {
-				console.log(data);
+				return data;
 			});
 	}
 }

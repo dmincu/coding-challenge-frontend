@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import Divider from 'material-ui/Divider';
-import {blue500, yellow600} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import searchIcon from './resources/search-icon-white.png';
+import arrowDownIcon from './resources/arrow-down.svg';
 import Login, {Logged} from './Login.js';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -13,11 +13,6 @@ import './Menu.css';
 const muiTheme = getMuiTheme({
   appBar: {
     height: 50,
-  },
-  drawer: {
-    width: 200,
-    backgroundColor: blue500,
-    textColor: yellow600,
   }
 });
 
@@ -51,7 +46,10 @@ class Menu extends Component {
             open={this.state.open}
             onRequestChange={(open) => this.setState({open})} >
             <MenuItem
-              primaryText={logged ? this.name : 'Guest'} />
+              onClick={this.handleToggle}
+              primaryText={this.state.logged ? 'Guest' : this.name}
+              rightIcon={<img src={arrowDownIcon} alt="arrow down icon" />}
+            />
             <MenuItem primaryText="Discover"
               onClick={this.props.onMovieListClick}
               rightIcon={<img src={searchIcon}

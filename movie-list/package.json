@@ -7,7 +7,10 @@
     "moviedb": "^0.2.10",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
+    "react-dropdown-button": "^1.0.11",
+    "react-icons": "^2.2.7",
+    "react-scripts": "1.1.4",
+    "simple-flexbox": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
