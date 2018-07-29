@@ -21,7 +21,7 @@ class Menu extends Component {
   state = {
     name: "Diana",
     open: false,
-    logged: true,
+    logged: false,
   };
 
   handleChange = (event, logged) => {
@@ -47,7 +47,7 @@ class Menu extends Component {
             onRequestChange={(open) => this.setState({open})} >
             <MenuItem
               onClick={this.handleToggle}
-              primaryText={this.state.logged ? 'Guest' : this.name}
+              primaryText={this.state.logged ? this.name : 'Guest'}
               rightIcon={<img src={arrowDownIcon} alt="arrow down icon" />}
             />
             <MenuItem primaryText="Discover"
