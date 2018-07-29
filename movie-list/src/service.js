@@ -48,14 +48,8 @@ class MovieService {
 			});
 	}
 
-	static getImage(imagePath) {
-		return fetch(IMAGE_BASE + imagePath + API_KEY)
-			.then(res => {
-				return res.json();
-			})
-			.then(data => {
-				return data;
-			});
+	static getImageUrl(imagePath) {
+		return IMAGE_BASE + imagePath + API_KEY;
 	}
 }
 

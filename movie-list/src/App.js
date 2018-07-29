@@ -12,16 +12,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieCount: 0,
+      itemCount: 0,
       itemList: [],
     };
     this.onMovieListClick = this.onMovieListClick.bind(this);
     this.onTvListClick = this.onTvListClick.bind(this);
-    this.getMovieCount = this.getMovieCount.bind(this);
   }
 
   componentDidMount() {
-    this.getMovieCount();
     this.onMovieListClick();
   }
 
@@ -36,7 +34,7 @@ class App extends Component {
             poster: result.poster_path,
           };
         });
-        this.setState({itemList: movies});
+        this.setState({itemList: movies, itemCount: res.total_results});
       });
     this.forceUpdate();
   }
@@ -51,16 +49,8 @@ class App extends Component {
           poster: result.poster_path,
         };
       });
-      this.setState({itemList: tvShows});
+      this.setState({itemList: tvShows, itemCount: res.total_results});
     });
-    this.forceUpdate();
-  }
-
-  getMovieCount() {
-    MovieService.listMovies()
-      .then(res => {
-        this.setState({movieCount: res.total_pages});
-      });
     this.forceUpdate();
   }
 
@@ -73,10 +63,10 @@ class App extends Component {
             onTvListClick={this.onTvListClick} />
           <Column flexGrow={1}>
             <Row>
-                <h3>{this.state.movieCount}</h3>
+                <h3>{this.state.itemCount}</h3>
             </Row>
             <Row flexGrow={1}>
-                <Column flexGrow={1} horizontal='center'>
+                <Column flexGrow={0.7} horizontal='center'>
                 {
                   this.state.itemList.map((comp, i) => 
                     <MovieCard
@@ -87,7 +77,7 @@ class App extends Component {
                         key={i}  />
                 )}
                 </Column>
-                <Column flexGrow={1}>
+                <Column flexGrow={0.3}>
                     <Row horizontal='center'>
                       <h3> Search Box </h3>
                     </Row>
