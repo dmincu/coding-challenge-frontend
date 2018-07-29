@@ -6,12 +6,24 @@ class MovieService {
 
    static getGenres() {
    		let GET_GENRES = '/genre/movie/list';
-		return API_BASE + GET_GENRES + API_KEY;
+		return fetch(API_BASE + GET_GENRES + API_KEY)
+			.then(res => {
+				return res.json();
+			})
+			.then(data => {
+				return data.genres.map((entry) => {return entry.name;});
+			});
 	}
 
 	static listMovies() {
    		let GET_MOVIES = '/discover/movie';
-		return API_BASE + GET_MOVIES + API_KEY;
+		return fetch(API_BASE + GET_MOVIES + API_KEY)
+			.then(res => {
+				return res.json();
+			})
+			.then(data => {
+				return data;
+			});
 	}
 
 	static listTvShows() {

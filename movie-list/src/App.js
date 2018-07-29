@@ -13,17 +13,20 @@ class App extends Component {
     super(props);
     this.state = {
       movieCount: 0,
-      movieList: [],
-      tvShows: [],
+      itemList: [],
     };
     this.onMovieListClick = this.onMovieListClick.bind(this);
     this.onTvListClick = this.onTvListClick.bind(this);
     this.getMovieCount = this.getMovieCount.bind(this);
   }
 
+  componentDidMount() {
+    this.getMovieCount();
+    this.onMovieListClick();
+  }
+
   onMovieListClick() {
-    fetch(MovieService.listMovies())
-      .then(res => {return res.json();})
+    MovieService.listMovies()
       .then(res => {
         let movies = res.results.map(result => {
           return {
@@ -33,7 +36,7 @@ class App extends Component {
             poster: result.poster_path,
           };
         });
-        this.setState({movieList: movies});
+        this.setState({itemList: movies});
       });
     this.forceUpdate();
   }
@@ -48,16 +51,14 @@ class App extends Component {
           poster: result.poster_path,
         };
       });
-      this.setState({tvShows: tvShows});
+      this.setState({itemList: tvShows});
     });
     this.forceUpdate();
   }
 
   getMovieCount() {
-    fetch(MovieService.listMovies())
-      .then(res => {res.json();})
+    MovieService.listMovies()
       .then(res => {
-        console.log(res.total_pages);
         this.setState({movieCount: res.total_pages});
       });
     this.forceUpdate();
@@ -76,17 +77,22 @@ class App extends Component {
             </Row>
             <Row flexGrow={1}>
                 <Column flexGrow={1} horizontal='center'>
-                    <h3> Column 1 </h3>
-                    <span> column 1 content </span>
+                {
+                  this.state.itemList.map((comp, i) => 
+                    <MovieCard
+                        title={comp.title}
+                        description={comp.description}
+                        score={comp.score}
+                        poster={comp.poster}
+                        key={i}  />
+                )}
                 </Column>
-                <Column flexGrow={1} vertical='center'>
+                <Column flexGrow={1}>
                     <Row horizontal='center'>
-                      <h3> Column 2 </h3>
-                      <span> column 2 content </span>
+                      <h3> Search Box </h3>
                     </Row>
                     <Row horizontal='center'>
-                      <h3> Column 2 </h3>
-                      <span> column 2 content </span>
+                      <h3> Filter List </h3>
                     </Row>
                 </Column>
             </Row>
